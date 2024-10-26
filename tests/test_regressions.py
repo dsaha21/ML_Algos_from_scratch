@@ -4,7 +4,7 @@ sys.dont_write_bytecode = True
 import matplotlib.pyplot as plt, numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
-from ml_scratch.linear_reg import LinearRegression, r2_score
+from ml_scratch.regressions import LinearRegression, r2_score
 
 def mean_squared_error(y_true, y_pred):
     return np.mean((y_true - y_pred) ** 2)

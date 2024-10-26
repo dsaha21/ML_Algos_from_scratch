@@ -70,3 +70,4 @@ class LogisticRegression:
         # ypred_cls = [if 0 or 1]
         # return ypred_cls
         pass
+
