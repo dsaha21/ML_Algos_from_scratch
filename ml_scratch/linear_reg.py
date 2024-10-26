@@ -34,3 +34,39 @@ class LinearRegression:
     def predict(self, X):
         y_approximated = np.dot(X, self.weights) + self.bias
         return y_approximated
+    
+class LogisticRegression:
+    def __init__(self, lr, iters) -> None:
+        self.w = None
+        self.b = None
+        self.lr = lr
+        self.iters = iters
+
+    def _sigmoid(self,x):
+        return 1 / (1 + np.exp(-x))
+    
+    def fit(self, X, y):
+        #take the shape
+        n_samples, n_features = X.shape
+
+        #enter the wights and bais
+        self.w = np.zeros_like(n_features)
+        self.b = 0
+
+        #gradient descent
+        for _ in range(self.iters):
+            linear_model = np.dot(self.w, X) + self.b
+            y_pred = self._sigmoid(linear_model)
+
+            dw = (1/n_samples)*np.dot(X.T, (y_pred-y))
+            db = (1/n_samples)*np.sum(y_pred-y)
+            #update
+            self.w -=self.lr * dw
+            self.b -=self.lr * db 
+
+    def predict(self, X):
+        # lm = 
+        # ypred = 
+        # ypred_cls = [if 0 or 1]
+        # return ypred_cls
+        pass
