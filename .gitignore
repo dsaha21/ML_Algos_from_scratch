@@ -1,2 +1,5 @@
 .venv
 poetry.lock
+
+ml_scratch/__pycache__
+tests/__pycache__
