@@ -1,4 +1,5 @@
 import numpy as n
+from collections import Counter
 
 class SVM:
     def __init__(self, learning_rate=0.001, lambda_param=0.01, n_iters=1000):
@@ -39,11 +40,22 @@ class KNN:
         self.Xtrain = X
         self.ytrain  = y
     
-    def _euc_dist(x1, x2):
+    def euc_dist(x1, x2):
         return n.sqrt(n.sum((x1-x2)**2)) 
     
     def _predict(self, x):
-        pass
+        # Compute distances between x and all examples in the training set
+        distances = [self.euc_dist(x, x_train) for x_train in self.Xtrain]
+
+        # Sort by distance and return indices of the first k neighbors
+        k_idx = n.argsort(distances)[: self.knn]
+
+        # Extract the labels of the k nearest neighbor training samples
+        k_neighbor_labels = [self.ytrain[i] for i in k_idx]
+
+        # return the most common class label
+        most_common = Counter(k_neighbor_labels).most_common(1)
+        return most_common[0][0]
 
     def predict(self, X):
         y_pred = [self._predict(x) for x in X]
